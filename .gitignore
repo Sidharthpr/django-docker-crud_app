@@ -1,0 +1,55 @@
+# Byte-compiled / compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+myenv/
+
+# Django-related files
+db.sqlite3
+*.db
+media/
+static/
+
+# Ignore logs
+*.log
+
+# Ignore environment variables and secrets
+.env
+*.env
+
+# Ignore Docker-related files
+docker-compose.override.yml
+postgres_data/
+
+# Ignore IDE/editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# Ignore compiled Cython files
+*.c
+*.so
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+
+# Ignore pytest cache
+.pytest_cache/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
