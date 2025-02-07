@@ -24,6 +24,17 @@ static/
 # Ignore Docker-related files
 docker-compose.override.yml
 postgres_data/
+.dockerignore
+
+# PostgreSQL/PostGIS-specific files (Database Volume & Configs)
+pg_data/
+postgis_data/
+pg_hba.conf
+pg_ident.conf
+postgresql.conf
+*.pgsql
+*.backup
+*.sql
 
 # Ignore IDE/editor-specific files
 .vscode/
@@ -35,6 +46,11 @@ postgres_data/
 # Ignore compiled Cython files
 *.c
 *.so
+
+# Ignore Python package metadata
+*.egg-info/
+dist/
+build/
 
 # Ignore coverage reports
 htmlcov/
@@ -53,3 +69,6 @@ coverage.xml
 # Ignore system files
 .DS_Store
 Thumbs.db
+
+# Ignore Pip cache
+~/.cache/pip/

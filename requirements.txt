@@ -1,3 +1,5 @@
-django
+Django>=4.2,<5.0
 djangorestframework
 psycopg2-binary
+djangorestframework-gis
+GDAL==3.6.4  # Use the version that matches your system GDAL

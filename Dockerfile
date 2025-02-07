@@ -1,15 +1,32 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
+# Install system dependencies - note the additional packages
+RUN apt-get update && apt-get install -y \
+    binutils \
+    gdal-bin \
+    libproj-dev \
+    postgresql-client \
+    python3-gdal \
+    libgdal-dev \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set GDAL environment variables
+ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
+ENV C_INCLUDE_PATH=/usr/include/gdal
+
+# Install GDAL Python bindings first
+RUN pip install GDAL==$(gdal-config --version) --no-cache-dir
+
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Install wait-for-it script
 ADD https://github.com/vishnubob/wait-for-it/raw/master/wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 
-# Modify entrypoint to wait for database
-CMD /wait-for-it.sh database:5432 -- python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+CMD ["/wait-for-it.sh", "database:5432", "--", "sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
